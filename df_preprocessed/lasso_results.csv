@@ -10,3 +10,15 @@ Lasso Regression, 80-20, 100.0, 1.0, 1.0, 1.0, {Alpha = 0.01 Max Iterations = 10
 Lasso Regression, 80-20, 86.4677307425399, 0.0, 0.0, nan, {Alpha = 0.1 Max Iterations = 1000}
 Lasso Regression, 80-20, 86.88410825815406, 0.0, 0.0, nan, {Alpha = 0.1 Max Iterations = 500}
 Lasso Regression, 80-20, 86.8147120055517, 0.0, 0.0, nan, {Alpha = 0.1 Max Iterations = 100}
+Lasso Regression, 80-20, 100.0, 1.0, 1.0, 1.0, {Alpha = 0.0001 Max Iterations = 1000}
+Lasso Regression, 80-20, 100.0, 1.0, 1.0, 1.0, {Alpha = 0.0001 Max Iterations = 500}
+Lasso Regression, 80-20, 100.0, 1.0, 1.0, 1.0, {Alpha = 0.0001 Max Iterations = 100}
+Lasso Regression, 80-20, 100.0, 1.0, 1.0, 1.0, {Alpha = 0.01 Max Iterations = 1000}
+Lasso Regression, 80-20, 100.0, 1.0, 1.0, 1.0, {Alpha = 0.01 Max Iterations = 500}
+Lasso Regression, 80-20, 100.0, 1.0, 1.0, 1.0, {Alpha = 0.01 Max Iterations = 100}
+Lasso Regression, 80-20, 100.0, 1.0, 1.0, 1.0, {Alpha = 0.01 Max Iterations = 1000}
+Lasso Regression, 80-20, 100.0, 1.0, 1.0, 1.0, {Alpha = 0.01 Max Iterations = 500}
+Lasso Regression, 80-20, 100.0, 1.0, 1.0, 1.0, {Alpha = 0.01 Max Iterations = 100}
+Lasso Regression, 80-20, 86.4677307425399, 0.0, 0.0, nan, {Alpha = 0.1 Max Iterations = 1000}
+Lasso Regression, 80-20, 86.88410825815406, 0.0, 0.0, nan, {Alpha = 0.1 Max Iterations = 500}
+Lasso Regression, 80-20, 86.8147120055517, 0.0, 0.0, nan, {Alpha = 0.1 Max Iterations = 100}
