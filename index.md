@@ -60,11 +60,76 @@ Parameters like day, month, hour and minute are repetitive. Cyclic feature engin
 We have reproduced results from the papers and used the algorithms they have used in the papers to set a baseline from the previous studies. On our preprocessed data, we now use the Synthetic Minority Oversampling Technique(SMOTE), which uses KNN as its hidden layer algorithm to synthesize samples of minority classes to deal with the class imbalance(quite severe in our dataset). After we've dealt with class imbalance, we perform an 80:20 split and scale the data. Following this, we use the Boruta algorithm to select features, a complex algorithm involving Random Forests to automate feature selection. Random forest model produced the best scores given below:
 ![Baseline Results](images/baseline_performance.png)
 
-### Classification results using for df_1_3
-We have used the following algorithms to classify the data:
+### Classification 
+We used mutiple algorithms for multiple datasets and compared their performance.
+#### Classification for df_1_3
+We used the following algorithms for this dataset: <br>
+Logistic regression <br>
+Hyperparameters :
+```
+{Penalty = l2 Tolerance = 1e-05 Max Iterations = 500 Solver = lbfgs}
+```
+Bayesian classifier <br>
+Hyperparameters :
+```
+{Alpha = 0.1}
+```
+Passive Aggressive Classifier <br>
+Hyperparameters :
+```
+{default}
+```
+SGD Classifier  <br>
+Hyperparameters :
+```
+{Default}
+```
+Among these algorithms, Logistic regression performed the best with an accuracy of 0.96 and an F1 score of 0.83.
 
+#### Classification for df_1_10
+We used the following algorithms for this dataset: <br>
+Logistic regression <br>
+Random Forest Classifier <br>
+
+We used GridSearchCV to find the best parameters for the Random Forest Classifier and Logistic regression. The best parameters for Random Forest Classifier were:
+```
+{'max_depth': 4, 'max_features': 'log2', 'n_estimators': 100}
+```
+The best parameters for Logistic regression were:
+```
+{'C': 0.01, max_iter': 1000}
+```
+
+#### Classification for df_1_25
+We used the following algorithms for this dataset:
+Random Forest Classifier <br>
+Hyperparameters :
+```
+{n_estimators = 400}
+```
+XGBoost Classifier <br>
+Hyperparameters :
+```
+{colsample_bytree=1.0, gamma=0, max_depth=5, min_child_weight=5, subsample=1}
+```
+LightGBM Classifier <br>
+Hyperparameters :
+```
+{num_leaves = 100}
+```
+CatBoost Classifier <br>
+Hyperparameters :
+```
+{depth = 5,iterations = 1000,learning_rate = 0.1}
+```
 
 ## Results
+The result using multiple algorithms for multiple datasets are as follows:
+![Classification Results](images/model_performances.png)
+
+
+We trained the model on complete datset using these algorithms with same hyperparameters and got the following results:
+![Classification Results](images/results_on_final_data.png)
 
 ## Observations
 
