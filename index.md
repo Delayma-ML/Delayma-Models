@@ -16,7 +16,26 @@ Accurately predicting flight delays is a crucial point of research as it is affe
 ## Dataset Details
 The dataset source is from [this kaggle dataset](https://www.kaggle.com/datasets/threnjen/2019-airline-delays-and-cancellations), which contains information about flights that took off from JFK Airport between November 2019 and January 2020.
 
+Here are some interesting details about this dataset :-
+- Apart from a few outliers, distance doesn't seem to have a strong correlation with delay.
+
+![delay_vs_dist](images/delay_vs_dist.png)
+
+- If we look at the most common destination states, they are California, Florida, and New York. This is not surprising as these are the most populous states in the US. Surprisingly, the two most common destinations are in California, which is on the other side of the country. 
+
+![dest_states](images/dest_airports.png)
+
+- Extreme weather condition, like very high temperature and very low temperature, can cause flight delays. This makes sense as extreme weather conditions can cause problems with the aircraft and the airport.
+
+![temp_vs_delay](images/temp_vs_delay.png)
+
+ - Even though earlier we stated that there may be some correlation between temperature and delay, the correlation is not very strong. In fact, the correlation between and any weather condition and delay is not very strong. 
+  
+![weather_corr](images/weather_corr.png)
+
 Datasets used for Classification had their `DEP_DELAY` column converted to binary classes based on delay, where delay is true if the departure time delay exceeds 15 minutes.
+
+Here are some interesting details about this dataset :-
 
 To simplify the classification problem we decided to begin with the smaller problem and then proceed to the bigger one. To proceed, four sub-datasets were created from this.
 - **df_1_3** - Dataset with top 3 most frequent destinations.
