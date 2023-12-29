@@ -1,4 +1,4 @@
-# Delayma
+# Delayma: A Comprehensive Approach to Accurate Flight Delay Forecasting
 
 ### Authors:
 - [Anirudh S. Kumar](https://github.com/Anirudh-S-Kumar)
@@ -14,9 +14,9 @@ Accurately predicting flight delays is a crucial point of research as it is affe
 ## Related Work
 
 ## Dataset Details
-The dataset source is from a Kaggle Dataset(add dataset link), which contains information about flights that took off from JFK Airport between November 2019 and January 2020.
+The dataset source is from [this kaggle dataset](https://www.kaggle.com/datasets/threnjen/2019-airline-delays-and-cancellations), which contains information about flights that took off from JFK Airport between November 2019 and January 2020.
 
-Datasets used for Classification had their DEP_DELAY column converted to binary classes based on delay, where delay is true if the departure time delay exceeds 15 minutes.
+Datasets used for Classification had their `DEP_DELAY` column converted to binary classes based on delay, where delay is true if the departure time delay exceeds 15 minutes.
 
 To simplify the classification problem we decided to begin with the smaller problem and then proceed to the bigger one. To proceed, four sub-datasets were created from this.
 - **df_1_3** - Dataset with top 3 most frequent destinations.
@@ -37,7 +37,7 @@ The feature initially had 25 different conditions. In some data points, the Cond
 Parameters like day, month, hour and minute are repetitive. Cyclic feature engineering is required on such cyclic parameters, where we represent one parameter on a circle, with all the points on the circle showing its periodic properties. Therefore, cyclic feature engineering was done on columns MONTH, DAY_OF_WEEK, DAY_OF_MONTH.  
 
 ## Methodology
- ### Baseline for classification
+### Baseline for classification
 We have reproduced results from the papers and used the algorithms they have used in the papers to set a baseline from the previous studies. On our preprocessed data, we now use the Synthetic Minority Oversampling Technique(SMOTE), which uses KNN as its hidden layer algorithm to synthesize samples of minority classes to deal with the class imbalance(quite severe in our dataset). After we've dealt with class imbalance, we perform an 80:20 split and scale the data. Following this, we use the Boruta algorithm to select features, a complex algorithm involving Random Forests to automate feature selection. Random forest model produced the best scores given below:
 ![Baseline Results](images/baseline_performance.png)
 
