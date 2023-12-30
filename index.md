@@ -13,6 +13,16 @@ Accurately predicting flight delays is a crucial point of research as it is affe
 
 ## Related Work
 
+Several attempts have been made before to predict flight delays. 
+
+Jia Yi and team\cite{yi2021flight} have attempted at classifier with a delay defined as the arrival or departure is 15 minutes later than scheduled. They've tried to perform a stacking algorithm with two layers. The first-level learners include KNN, Random Forest, Logistic Regression, Decision Tree, and Gaussian Naive Bayes. The second level learner is a Logistic Regression model. Yi uses the Boruta algorithm to perform feature selection. The stacking algorithm has better scores(accuracy, precision, recall and F1 score) than any single-level learner. Random forest classifiers come close to the stacking algorithm as compared to the rest of the algorithms. Their classification was performed with an accuracy of 0.82 for a stacking algorithm.
+
+Esmaeilzadeh and Mokhtarimousavi\cite{paid_paper} attempted to employ Support Vector Machines to explore the non-linear relationship between flight delay outcomes. They considered only 20 days in 2018 at three major New York City airports. According to their findings, factors such as pushback delay, taxi-out delay, ground delay program, and demand-capacity imbalance with probabilities of 0.506, 0.478, 0.339, and 0.338 are significantly associated with flight departure delay.
+
+Zhang and Ma\cite{zhang} have attempted multi-classification of departure delay with the three classes being less than 15, between 15 and 60 minutes, and greater than 60 minutes. They have merged the flight dataset with a weather dataset and 260k samples in their dataset. Features were selected manually. They performed the CatBoost algorithm, which uses gradient boosting on decision trees. The learning is implemented on the GPU while the scoring algorithm runs on the CPU. The model performed with 0.77 accuracy.
+
+Tang\cite{tang_yuemin} attempted to perform a binary classification with a flight being classified as delayed if the departure was 15 minutes later than scheduled. The data was taken for JFK Airport during November 2019 and December 2020. They performed tenfold cross-validation for Logistic Regression, KNN, Gaussian Naïve Bayes, Decision Trees, SVM, Random Forest, Gradient Boosted Trees from scikit learn with default parameters. Decision Trees performed the best with 0.977 accuracy, followed by gradient-boosted Trees.
+
 ## Dataset Details
 The dataset source is from [this kaggle dataset](https://www.kaggle.com/datasets/threnjen/2019-airline-delays-and-cancellations), which contains information about flights that took off from JFK Airport between November 2019 and January 2020.
 
