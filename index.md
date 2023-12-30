@@ -16,6 +16,24 @@ Accurately predicting flight delays is a crucial point of research as it is affe
 ## Dataset Details
 The dataset source is from [this kaggle dataset](https://www.kaggle.com/datasets/threnjen/2019-airline-delays-and-cancellations), which contains information about flights that took off from JFK Airport between November 2019 and January 2020.
 
+### Insights from the dataset
+- Apart from a few outliers, distance doesn't seem to have a strong correlation with delay.
+
+![delay_vs_dist](images/delay_vs_dist.png)
+
+- If we look at the most common destination states, they are California, Florida, and New York. This is not surprising as these are the most populous states in the US. Surprisingly, the two most common destinations are in California, which is on the other side of the country. 
+
+![dest_states](images/dest_airports.png)
+
+- Extreme weather condition, like very high temperature and very low temperature, can cause flight delays. This makes sense as extreme weather conditions can cause problems with the aircraft and the airport.
+
+![temp_vs_delay](images/temp_vs_delay.png)
+
+ - Even though earlier we stated that there may be some correlation between temperature and delay, the correlation is not very strong. In fact, the correlation between and any weather condition and delay is not very strong. 
+  
+![weather_corr](images/weather_corr.png)
+
+### How we used the dataset
 Datasets used for Classification had their `DEP_DELAY` column converted to binary classes based on delay, where delay is true if the departure time delay exceeds 15 minutes.
 
 To simplify the classification problem we decided to begin with the smaller problem and then proceed to the bigger one. To proceed, four sub-datasets were created from this.
@@ -83,6 +101,7 @@ Datasets used for Classification had their `DEP_DELAY` column converted to binar
 The columns `MONTH`, `DAY_OF_MONTH`, `DAY_OF_WEEK` were converted to sin and cos values to make them cyclic. The columns `Temperature`, `Dew Point`, `Wind`, `Condition` were converted to numerical values. The columns `Cloudy`, `Windy`, `Fair`, `Rain`, `Fog`, `Drizzle`, `Snow`, `Wintry Mix`, `Freezing Rain` were added in the dataset after preprocessing and `MONTH`, `DAY_OF_MONTH`, `DAY_OF_WEEK`, and `Condition` were dropped from the dataset.## Methodology
 ### Baseline for classification
 We have reproduced results from the papers and used the algorithms they have used in the papers to set a baseline from the previous studies. On our preprocessed data, we now use the Synthetic Minority Oversampling Technique(SMOTE), which uses KNN as its hidden layer algorithm to synthesize samples of minority classes to deal with the class imbalance(quite severe in our dataset). After we've dealt with class imbalance, we perform an 80:20 split and scale the data. Following this, we use the Boruta algorithm to select features, a complex algorithm involving Random Forests to automate feature selection. Random forest model produced the best scores given below:
+
 ![Baseline Results](images/baseline_performance.png)
 
 ### Classification 
