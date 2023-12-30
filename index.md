@@ -85,7 +85,6 @@ Datasets used for Classification had their `DEP_DELAY` column converted to binar
 | CRS_ELAPSED_TIME            | int64    | Scheduled journey time of the flight         |
 | DISTANCE                    | int64    | Distance of the flight                       |
 | CRS_DEP_M                   | int64    | Scheduled Departure Time                     |
-| DEP_TIME_M                  | int64    | Actual Departure Time                        |
 | CRS_ARR_M                   | int64    | Scheduled Arrival Time                       |
 | Temperature                 | int64    | Temperature                                  |
 | Dew Point                   | object   | Dew Point                                    |
@@ -174,19 +173,18 @@ We can see that the standard deviation has decreased significantly. Only Logisti
 ## Results
 The result using multiple algorithms for multiple datasets are as follows:
 ![Classification Results](images/model_performances.png)
+Logistic regression seemeed to be a consistent model throughout all the different datasets, achieving almost 100% accuracy.
 
-
-We trained the model on complete datset using these algorithms with same hyperparameters and got the following results:
+We trained the model on complete train set using these algorithms with same hyperparameters as were used in the other datasets, and got the following results:
 ![Classification Results](images/results_on_final_data.png)
+The labels in the graph above represent which model was used to train the complete train set.
 
-Here is the comparison of the results of the algorithms on the complete dataset before and after removing outliers:
+Here is the comparison of the results of the algorithms with default parameters on the complete train set before and after removing outliers:
 ![Classification Results](images/regression_with_and_without_outliers.png)
 
 
-
-## Observations
-
 ## Conclusion and Future Work
+We conclude that we are able to get a very highly tuned model of bayesian ridge regression for getting nearly predictions for flight delays. We can use this model to predict flight delays and take necessary actions to prevent them. We can also use this model to predict flight delays and inform the passengers about the delay in advance. This will help the passengers to plan their journey accordingly.
 
 ## References
 
