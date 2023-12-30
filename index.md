@@ -151,16 +151,16 @@ We used mutiple algorithms for multiple datasets and compared their performance.
 
 | Dataset | Algorithm                     | Hyperparameters                                                                       |
 | ------- | ----------------------------- | ------------------------------------------------------------------------------------- |
-| df_1_3  | Logistic Regression           | Penalty = l2, Tolerance = 1e-05, Max Iterations = 500, Solver = lbfgs                 |
+| df_1_3  | Logistic Regression           | Penalty = l2, Tolerance = $10^{-5}$, Max Iterations = 500, Solver = lbfgs                 |
 |         | Bayesian Classifier           | Alpha = 0.1                                                                           |
 |         | Passive Aggressive Classifier | Default                                                                               |
 |         | SGD Classifier                | Default                                                                               |
-| df_1_10 | Logistic Regression           | C = 0.01, max_iter = 1000                                                             |
+| df_1_10 | Logistic Regression           | C = $10^{-2}$, max_iter = $10^{3}$                                                             |
 |         | Random Forest Classifier      | max_depth = 4, max_features = 'log2', n_estimators = 100                              |
 | df_1_25 | Random Forest Classifier      | n_estimators = 400                                                                    |
 |         | XGBoost Classifier            | colsample_bytree = 1.0, gamma = 0, max_depth = 5, min_child_weight = 5, subsample = 1 |
 |         | LightGBM Classifier           | num_leaves = 100                                                                      |
-|         | CatBoost Classifier           | depth = 5, iterations = 1000, learning_rate = 0.1                                     |
+|         | CatBoost Classifier           | depth = 5, iterations = $10^{3}$, learning_rate = 0.1                                     |
 
 The models were evaluated using key metrics such as Accuracy, Precision, Recall, and F1-Score.
 
@@ -172,13 +172,13 @@ We initially used the following algorithms and did hyperparameter tuning on them
 
 | Model                 | Hyperparameters                              | MSE                    | Standard Deviation | R2 Score           |
 | --------------------- | -------------------------------------------- | ---------------------- | ------------------ | ------------------ |
-| RandomForestRegressor | max_depth=5, n_estimators=10, random_state=1 | 8.181139821257709      | 40.70694805649899  | 0.9953494499785353 |
-| LogisticRegression    | max_iter=1000                                | 238.81002775850104     | 35.144905132310484 | 0.1696738376127689 |
-| PolynomialFeatures    |                                              | 1.3481809385058682e-19 | 41.94254194735039  | 1.0                |
-| Ridge                 | alpha=0.1                                    | 1.7009984245916603e-14 | 41.942541819448124 | 1.0                |
-| Lasso                 | alpha=0.1                                    | 1.0151470431585268e-05 | 41.939918134838756 | 0.9999999942294201 |
-| BayesianRidge         |                                              | 1.4721718996060103e-24 | 41.9425419472715   | 1.0                |
-| ElasticNet            | alpha=0.1                                    | 9.800489179465707e-06  | 41.93953594682402  | 0.9999999944289346 |
+| RandomForestRegressor | max_depth=5, n_estimators=10, random_state=1 | 8.181     | 40.707  | 0.995 |
+| LogisticRegression    | max_iter=1000                                | 238.810     | 35.145 | 0.170 |
+| PolynomialFeatures    |                                              | $1.348 \times 10^{-19}$ | 41.943  | 1.0                |
+| Ridge                 | alpha=0.1                                    | $1.701 \times 10^{-14}$ | 41.943 | 1.0                |
+| Lasso                 | alpha=0.1                                    | $1.02 \times 10^{-5}$ | 41.940 | 1.0 |
+| BayesianRidge         |                                              | $1.472 \times 10^{-24}$ | 41.943   | 1.0                |
+| ElasticNet            | alpha=0.1                                    | $9.800 \times 10^{-6}$  | 41.940  | 1.0 |
 
 Our model is yielding a low Mean Squared Error (MSE) and a high R2 score, which are positive indicators. However, the high standard deviation suggests the presence of outliers in our dataset. To address this, we employed the z-score method with a threshold of 3.0 to identify and remove these outliers. The results post outlier removal are as follows:
 
