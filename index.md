@@ -197,14 +197,19 @@ The results reveal a substantial reduction in the standard deviation, with the e
 ## Results
 
 The result using multiple algorithms for multiple datasets are as follows:
+
 ![Classification Results](images/model_performances.png)
+
 Logistic regression seemeed to be a consistent model throughout all the different datasets, achieving almost 100% accuracy.
 
 We trained the model on complete train set using these algorithms with same hyperparameters as were used in the other datasets, and got the following results:
+
 ![Classification Results](images/results_on_final_data.png)
+
 The labels in the graph above represent which model was used to train the complete train set.
 
 Here is the comparison of the results of the algorithms with default parameters on the complete train set before and after removing outliers:
+
 ![Classification Results](images/regression_with_and_without_outliers.png)
 
 ## Conclusion and Future Work
