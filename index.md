@@ -72,6 +72,7 @@ Basic preprocessing, which was done on the complete dataset:
 To simplify the problem, we decided to begin with the smaller problem and then proceed to the bigger one. To proceed, four sub-datasets were created from this.
 
 Datasets used for Classification had their `DEP_DELAY` column converted to binary classes based on delay, where delay is true if the departure time delay exceeds 15 minutes.
+
 | Feature                    | Format   | Description                                  |
 |-----------------------------|----------|----------------------------------------------|
 | MONTH                       | int64    | month                                        |
