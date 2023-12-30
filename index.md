@@ -24,85 +24,117 @@ To simplify the classification problem we decided to begin with the smaller prob
 - **df_1_25** - Dataset with top 25 most frequent destinations.
 - **df_preprocessed** - Dataset with all destinations.
 
-For the regression problem, the DEP_DELAY column was used as it is.
+For the regression problem, the `DEP_DELAY` column was used as it is.
 - **m1_final_regression_dataset** - Dataset with all destinations for regression.
 
 
 
 ## Data Pre-processing
-Basic preprocessing, which was done on the complete dataset:-
-    
-The feature initially had 25 different conditions. In some data points, the Condition field had more than one condition. First, we performed an encoding similar to label encoding in a monotonically increasing way. For example, there were different kinds of cloudy, such as 'mostly cloudy' and 'partly cloudy', for which we gave numbers 2 and 1, respectively. Each feature was given one column, which resulted in 9 new columns and the deletion of the Condition column.
+Basic preprocessing, which was done on the complete dataset:
 
-Parameters like day, month, hour and minute are repetitive. Cyclic feature engineering is required on such cyclic parameters, where we represent one parameter on a circle, with all the points on the circle showing its periodic properties. Therefore, cyclic feature engineering was done on columns MONTH, DAY_OF_WEEK, DAY_OF_MONTH.  
+1. The feature `Condition` initially had 25 different conditions. In some data points, the `Condition` field had more than one condition. First, we performed an encoding similar to label encoding in a monotonically increasing way. For example, there were different kinds of cloudy, such as 'mostly cloudy' and 'partly cloudy', for which we gave numbers 2 and 1, respectively. Each feature was given one column, which resulted in 9 new columns and the deletion of the `Condition` column.
 
-## Methodology
+2. Parameters like day, month, hour, and minute are repetitive. Cyclic feature engineering is required on such cyclic parameters, where we represent one parameter on a circle, with all the points on the circle showing its periodic properties. Therefore, cyclic feature engineering was done on columns `MONTH`, `DAY_OF_WEEK`, `DAY_OF_MONTH`.
+
+To simplify the problem, we decided to begin with the smaller problem and then proceed to the bigger one. To proceed, four sub-datasets were created from this.
+
+Datasets used for Classification had their `DEP_DELAY` column converted to binary classes based on delay, where delay is true if the departure time delay exceeds 15 minutes.
+| Feature                    | Format   | Description                                  |
+|-----------------------------|----------|----------------------------------------------|
+| MONTH                       | int64    | month                                        |
+| DAY_OF_MONTH                | int64    | date on which flight departed                |
+| DAY_OF_WEEK                 | int64    | day number of the week on which flight departed |
+| OP_UNIQUE_CARRIER           | object   | Carrier Code                                 |
+| TAIL_NUM                    | object   | Airflight Number                             |
+| DEST                        | object   | Destination                                  |
+| DEP_DELAY                   | float64  | Departure delay of the flight                |
+| CRS_ELAPSED_TIME            | int64    | Scheduled journey time of the flight         |
+| DISTANCE                    | int64    | Distance of the flight                       |
+| CRS_DEP_M                   | int64    | Scheduled Departure Time                     |
+| DEP_TIME_M                  | int64    | Actual Departure Time                        |
+| CRS_ARR_M                   | int64    | Scheduled Arrival Time                       |
+| Temperature                 | int64    | Temperature                                  |
+| Dew Point                   | object   | Dew Point                                    |
+| Humidity                    | int64    | Humidity                                    |
+| Wind                        | object   | Wind type                                    |
+| Wind Speed                  | int64    | Wind speed                                   |
+| Wind Gust                   | int64    | Wind Gust                                    |
+| Pressure                    | float64  | Pressure                                    |
+| Condition                   | object   | Condition of the climate                     |
+| sch_dep                     | int64    | No. of flights scheduled for arrival         |
+| sch_arr                     | int64    | No. of flights scheduled for departure       |
+| TAXI_OUT                    | int64    | Taxi-out time                                |
+| Cloudy                      | int64    | Cloudy intensity                            |
+| Windy                       | int64    | Windy intensity                             |
+| Fair                        | int64    | Fair intensity                              |
+| Rain                        | int64    | Rain intensity                              |
+| Fog                         | int64    | Fog intensity                               |
+| Drizzle                     | int64    | Drizzle intensity                           |
+| Snow                        | int64    | Snow intensity                              |
+| Wintry Mix                  | int64    | Wintry Mix intensity                        |
+| Freezing Rain               | int64    | Freezing Rain intensity                     |
+| MONTH_sin                   | float64  | Sin value of month                          |
+| MONTH_cos                   | float64  | Cos value of month                          |
+| DAY_OF_MONTH_sin            | float64  | Sin value of day of month                   |
+| DAY_OF_MONTH_cos            | float64  | Cos value of day of month                   |
+| DAY_OF_WEEK_sin             | float64  | Sin value of day of the week                 |
+| DAY_OF_WEEK_cos             | float64  | Cos value of day of the week                 |
+
+The columns `MONTH`, `DAY_OF_MONTH`, `DAY_OF_WEEK` were converted to sin and cos values to make them cyclic. The columns `Temperature`, `Dew Point`, `Wind`, `Condition` were converted to numerical values. The columns `Cloudy`, `Windy`, `Fair`, `Rain`, `Fog`, `Drizzle`, `Snow`, `Wintry Mix`, `Freezing Rain` were added in the dataset after preprocessing and `MONTH`, `DAY_OF_MONTH`, `DAY_OF_WEEK`, and `Condition` were dropped from the dataset.## Methodology
 ### Baseline for classification
 We have reproduced results from the papers and used the algorithms they have used in the papers to set a baseline from the previous studies. On our preprocessed data, we now use the Synthetic Minority Oversampling Technique(SMOTE), which uses KNN as its hidden layer algorithm to synthesize samples of minority classes to deal with the class imbalance(quite severe in our dataset). After we've dealt with class imbalance, we perform an 80:20 split and scale the data. Following this, we use the Boruta algorithm to select features, a complex algorithm involving Random Forests to automate feature selection. Random forest model produced the best scores given below:
 ![Baseline Results](images/baseline_performance.png)
 
 ### Classification 
 We used mutiple algorithms for multiple datasets and compared their performance.
-#### Classification for df_1_3
-We used the following algorithms for this dataset: <br>
-Logistic regression <br>
-Hyperparameters :
-```
-{Penalty = l2 Tolerance = 1e-05 Max Iterations = 500 Solver = lbfgs}
-```
-Bayesian classifier <br>
-Hyperparameters :
-```
-{Alpha = 0.1}
-```
-Passive Aggressive Classifier <br>
-Hyperparameters :
-```
-{default}
-```
-SGD Classifier  <br>
-Hyperparameters :
-```
-{Default}
-```
-Among these algorithms, Logistic regression performed the best with an accuracy of 0.96 and an F1 score of 0.83.
+| Dataset      | Algorithm                      | Hyperparameters                                             |
+|--------------|--------------------------------|-------------------------------------------------------------|
+| df_1_3       | Logistic Regression             | Penalty = l2, Tolerance = 1e-05, Max Iterations = 500, Solver = lbfgs |
+|              | Bayesian Classifier             | Alpha = 0.1                                                 |
+|              | Passive Aggressive Classifier   | Default                                                     |
+|              | SGD Classifier                 | Default                                                     |
+| df_1_10      | Logistic Regression             | C = 0.01, max_iter = 1000                                   |
+|              | Random Forest Classifier        | max_depth = 4, max_features = 'log2', n_estimators = 100   |
+| df_1_25      | Random Forest Classifier        | n_estimators = 400                                           |
+|              | XGBoost Classifier              | colsample_bytree = 1.0, gamma = 0, max_depth = 5, min_child_weight = 5, subsample = 1 |
+|              | LightGBM Classifier             | num_leaves = 100                                            |
+|              | CatBoost Classifier             | depth = 5, iterations = 1000, learning_rate = 0.1           |
 
-#### Classification for df_1_10
-We used the following algorithms for this dataset: <br>
-Logistic regression <br>
-Random Forest Classifier <br>
+The models were evaluated using key metrics such as Accuracy, Precision, Recall, and F1-Score.
 
-We used GridSearchCV to find the best parameters for the Random Forest Classifier and Logistic regression. The best parameters for Random Forest Classifier were:
-```
-{'max_depth': 4, 'max_features': 'log2', 'n_estimators': 100}
-```
-The best parameters for Logistic regression were:
-```
-{'C': 0.01, max_iter': 1000}
-```
 
-#### Classification for df_1_25
-We used the following algorithms for this dataset:
-Random Forest Classifier <br>
-Hyperparameters :
-```
-{n_estimators = 400}
-```
-XGBoost Classifier <br>
-Hyperparameters :
-```
-{colsample_bytree=1.0, gamma=0, max_depth=5, min_child_weight=5, subsample=1}
-```
-LightGBM Classifier <br>
-Hyperparameters :
-```
-{num_leaves = 100}
-```
-CatBoost Classifier <br>
-Hyperparameters :
-```
-{depth = 5,iterations = 1000,learning_rate = 0.1}
-```
+### Regression
+
+After getting more that 97% accuracy in classification, we moved on to regression. We did regression on the entire dataset.
+
+We initially used the following algorithms and did hyperparameter tuning on them without removing outliers:
+
+| Model                   | Hyperparameters                            | MSE               | Standard Deviation | R2 Score         |
+|-------------------------|--------------------------------------------|-------------------|--------------------|------------------|
+| RandomForestRegressor  | max_depth=5, n_estimators=10, random_state=1 | 8.181139821257709 | 40.70694805649899  | 0.9953494499785353 |
+| LogisticRegression      | max_iter=1000                               | 238.81002775850104| 35.144905132310484 | 0.1696738376127689 |
+| PolynomialFeatures      |                                            | 1.3481809385058682e-19 | 41.94254194735039 | 1.0              |
+| Ridge                   | alpha=0.1                                   | 1.7009984245916603e-14 | 41.942541819448124 | 1.0              |
+| Lasso                   | alpha=0.1                                   | 1.0151470431585268e-05 | 41.939918134838756 | 0.9999999942294201 |
+| BayesianRidge           |                                            | 1.4721718996060103e-24 | 41.9425419472715  | 1.0              |
+| ElasticNet              | alpha=0.1                                   | 9.800489179465707e-06 | 41.93953594682402 | 0.9999999944289346 |
+
+
+As we can see, we are successfully getting a low MSE and high R2 score. However, the standard deviation is very high. This is because of the outliers in the dataset. We removed the outliers and got the following results:
+We removed out the outliers using z-score with threshold 3.0. We got the following results:
+
+| Model                   | Hyperparameters                            | MSE               | Standard Deviation | R2 Score         |
+|-------------------------|--------------------------------------------|-------------------|--------------------|------------------|
+| RandomForestRegressor  | max_depth=5, n_estimators=10, random_state=1 | 0.38696657430406917 | 18.92251379576839  | 0.9989203147691209 |
+| LogisticRegression      | max_iter=1000                               | 43.66264333132167 | 16.903501399081502 | 0.19251659625829812 |
+| PolynomialFeatures      |                                            | 9.07804542408821e-20 | 18.931636018258537 | 1.0              |
+| Ridge                   | alpha=0.1                                   | 8.345072074179379e-14 | 18.93163573579082 | 0.9999999999999998 |
+| Lasso                   | alpha=0.1                                   | 3.234717961771208e-05 | 18.925994878347524 | 0.9999999097473157 |
+| BayesianRidge           |                                            | 3.670305072093405e-26 | 18.931636018178416 | 1.0              |
+| ElasticNet              | alpha=0.1                                   | 3.3872517697929823e-05 | 18.925947405132025 | 0.9999999054914313 |
+
+
+We can see that the standard deviation has decreased significantly. Only Logistic Regression has a high standard deviation. This is because Logistic Regression is not a good model for regression. We can see that the MSE has also decreased significantly. We can also see that the R2 score has increased significantly. This is because the outliers were affecting the R2 score. We can see that the R2 score is now very close to 1.0. This means that the model is performing very well.
 
 ## Results
 The result using multiple algorithms for multiple datasets are as follows:
@@ -111,6 +143,11 @@ The result using multiple algorithms for multiple datasets are as follows:
 
 We trained the model on complete datset using these algorithms with same hyperparameters and got the following results:
 ![Classification Results](images/results_on_final_data.png)
+
+Here is the comparison of the results of the algorithms on the complete dataset before and after removing outliers:
+![Classification Results](images/regression_with_and_without_outliers.png)
+
+
 
 ## Observations
 
