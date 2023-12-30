@@ -184,13 +184,13 @@ Our model is yielding a low Mean Squared Error (MSE) and a high R2 score, which 
 
 | Model                 | Hyperparameters                              | MSE                    | Standard Deviation | R2 Score            |
 | --------------------- | -------------------------------------------- | ---------------------- | ------------------ | ------------------- |
-| RandomForestRegressor | max_depth=5, n_estimators=10, random_state=1 | 0.38696657430406917    | 18.92251379576839  | 0.9989203147691209  |
-| LogisticRegression    | max_iter=1000                                | 43.66264333132167      | 16.903501399081502 | 0.19251659625829812 |
-| PolynomialFeatures    |                                              | 9.07804542408821e-20   | 18.931636018258537 | 1.0                 |
-| Ridge                 | alpha=0.1                                    | 8.345072074179379e-14  | 18.93163573579082  | 0.9999999999999998  |
-| Lasso                 | alpha=0.1                                    | 3.234717961771208e-05  | 18.925994878347524 | 0.9999999097473157  |
-| BayesianRidge         |                                              | 3.670305072093405e-26  | 18.931636018178416 | 1.0                 |
-| ElasticNet            | alpha=0.1                                    | 3.3872517697929823e-05 | 18.925947405132025 | 0.9999999054914313  |
+| RandomForestRegressor | max_depth=5, n_estimators=10, random_state=1 | 0.387    | 18.923  | 0.999  |
+| LogisticRegression    | max_iter=1000                                | 43.663      | 16.904 | 0.193 |
+| PolynomialFeatures    |                                              | $9.079 \times 10^{-20}$   | 18.932 | 1.0                 |
+| Ridge                 | alpha=0.1                                    | $8.345 \times 10^{-14}$  | 18.932  | 1.0  |
+| Lasso                 | alpha=0.1                                    | $3.235 \times 10^{-5}$  | 18.926 | 1.0  |
+| BayesianRidge         |                                              | $3.670 \times 10^{-26}$  | 18.932 | 1.0                 |
+| ElasticNet            | alpha=0.1                                    | $3.387 \times 10^{-5}$ | 18.926 | 1.0  |
 
 The results reveal a substantial reduction in the standard deviation, with the exception of Logistic Regression. This is primarily due to the fact that Logistic Regression is not ideally suited for regression tasks. Furthermore, there's a notable decrease in the Mean Squared Error (MSE), indicating improved model performance. The R2 score has also seen a significant increase, nearing the optimal value of 1.0. This improvement can be attributed to the removal of outliers that were previously skewing the R2 score. Overall, these results suggest that our model is performing exceptionally well.
 
