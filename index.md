@@ -173,7 +173,6 @@ We initially used the following algorithms and did hyperparameter tuning on them
 | Model                 | Hyperparameters                              | MSE                    | Standard Deviation | R2 Score           |
 | --------------------- | -------------------------------------------- | ---------------------- | ------------------ | ------------------ |
 | RandomForestRegressor | max_depth=5, n_estimators=10, random_state=1 | 8.181      | 40.707  | 0.995 |
-| LogisticRegression    | max_iter=1000                                | 238.810    | 35.145 | 0.170 |
 | PolynomialFeatures    |                                              | 1.348 x 10<sup>-19</sup> | 41.943  | 1.0                |
 | Ridge                 | alpha=0.1                                    | 1.701 x 10<sup>-14</sup> | 41.943 | 1.0                |
 | Lasso                 | alpha=0.1                                    | 1.015 x 10<sup>-5</sup> | 41.940 | 1.0 |
@@ -185,7 +184,6 @@ Our model yields a low Mean Squared Error (MSE) and a high R2 score, which are p
 | Model                 | Hyperparameters                              | MSE                    | Standard Deviation | R2 Score            |
 | --------------------- | -------------------------------------------- | ---------------------- | ------------------ | ------------------- |
 | RandomForestRegressor | max_depth=5, n_estimators=10, random_state=1 | 0.387    | 18.923  | 0.999  |
-| LogisticRegression    | max_iter=1000                                | 43.663      | 16.904 | 0.193 |
 | PolynomialFeatures    |                                              | 9.078 x 10<sup>-20</sup>  | 18.932 | 1.0                 |
 | Ridge                 | alpha=0.1                                    | 8.345 x 10<sup>-14</sup>  | 18.932  | 1.0  |
 | Lasso                 | alpha=0.1                                    | 3.235 x 10<sup>-5</sup>  | 18.926 | 1.0  |
